@@ -1,0 +1,30 @@
+<div class="col-xs-3">
+    <h2>User info</h2>
+    <img src="/no_image.jpg" alt="No image"><table class="table">
+      <tbody><tr></tr> 
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th>てsてsてsて</th>
+      </tr>
+    </tbody></table>
+    <div class="row">
+        <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/177/edit"></a>
+    </div>
+
+
+<h2>New book</h2>
+ <%= form_for(@book) do |f| %>
+
+	<h4>title</h4>
+    <%= f.text_field :title %>
+
+    <h4>body</h4>
+    <%= f.text_area :body %>
+
+    <%= f.submit 'Create Book' %>
+
+<% end %>
