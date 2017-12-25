@@ -1,3 +1,40 @@
+<div class="col-xs-3">
+    <h2>User info</h2>
+    <table class="table">
+      <tbody><tr></tr>
+        <% if current_user.profile_image.present? %>
+          <%= attachment_image_tag current_user, :profile_image, :fill,100, 100, format: 'jpeg' %>
+        <% else %>
+          <p><%= image_tag "no_image.jpg", :width=>"100px", :height=>"100px" %></p>
+        <% end %>
+      <tr>
+        <th>name</th>
+        <th><%= current_user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= current_user.introduction %></th>
+      </tr>
+    </tbody></table>
+    <div class="row">
+        <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/177/edit"></a>
+    </div>
+    <%= link_to "Edit", edit_user_path(current_user.id) %>
+
+    <h2>New book</h2>
+ <%= form_for(@book) do |f| %>
+
+  <h4>title</h4>
+    <%= f.text_field :title %>
+
+    <h4>body</h4>
+    <%= f.text_area :body %>
+
+    <%= f.submit 'Create Book' %>
+
+<% end %>
+
+
 <h1>Books</h1>
 <table>
  <tr>
@@ -10,27 +47,100 @@
  <% @books.each do |book| %>
 
  <tr>
+  <td><%= link_to "user_path" do %>
+  <%= attachment_image_tag book.user, :profile_image, :fill,40,40, format: 'jpeg' %>
+<% end %></td>
   <td><%= book.title %></td>
   <td><%= book.body %></td>
-  <td><%= link_to "Show", book_path(book.id) %></td>
-  <td><%= link_to "Edit", edit_book_path(book.id) %></td>
-  <td><%= link_to "Destroy", destroy_book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %></td>
-
  </tr>
  <% end %>
 
 </table>
 
 
- <h2>New book</h2>
- <%= form_for(@book) do |f| %>
 
-	<h4>title</h4>
-    <%= f.text_field :title %>
 
-    <h4>body</h4>
-    <%= f.text_area :body %>
 
-    <%= f.submit 'Create Book' %>
 
-<% end %>
+
+
+<div class="body">
+      <div class="container">
+        
+        <p id="notice"></p>
+      
+        <div class="row">
+
+  <div class="col-xs-3">
+    <h2>User info</h2>
+    <img src="/no_image.jpg" alt="No image"><table class="table">
+      <tbody><tr></tr> 
+      <tr>
+        <th>name</th>
+        <th>BA-SHOW</th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th>てsてsてsて</th>
+      </tr>
+    </tbody></table>
+    <div class="row">
+        <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/177/edit"></a>
+    </div>
+
+    <h2>New book</h2>
+    <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="taQlpRHbSbZHmOiNk+2VDVjgbHn73bX11FfeMJCYitj1THl+T9e6CuWEyx7BZD0HTEp4mv8MEaTC94gfosHz9A==">
+  <div class="field row">
+    <label for="book_title">Title</label>
+    <input class="col-xs-12" type="text" name="book[title]" id="book_title">
+  </div>
+
+  <div class="field row">
+    <label for="book_opinion">Opinion</label>
+    <textarea class="col-xs-12" name="book[body]" id="book_body"></textarea>
+  </div>
+
+  <div class="actions row">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+  </div>
+</form>
+  </div>
+
+  <div class="col-xs-9">
+    <h2>Books</h2>
+
+        <table class="table table-hover table-inverse">
+      <thead>
+        <tr> 
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+            <td><a href="/users/118">
+              <img src="/no-image-icon.jpg" alt="No image icon">
+</a>            </td>
+            <td><a href="/books/264">cccc</a></td>
+            <td>cccccc</td>
+          </tr>
+          <tr>
+            <td><a href="/users/169">
+              <img src="/no-image-icon.jpg" alt="No image icon">
+</a>            </td>
+            <td><a href="/books/262">kkk</a></td>
+            <td>jjj</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+      </div>
+    </div>
+
+
+
+
