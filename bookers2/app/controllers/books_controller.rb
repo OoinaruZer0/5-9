@@ -14,9 +14,14 @@ class BooksController < ApplicationController
 
   		@book = Book.new(book_params)
       @book.user_id = current_user.id
-  		@book.save
-  		redirect_to book_path(@book.id)
-
+  		if @book.save
+  		  # redirect_to book_path(@book.id)
+        flash[:success] = "投稿が成功しました。"
+        redirect_to books_path, :flash => {:error => "errorが起きました"}
+      else
+        flash[:notice] = "TitleとOpinionを入力してください。もしくは、Opinionは２００文字以内でお願いします"
+        redirect_to books_path, :flash => {:error => "errorが起きました"}
+      end
   end
 
   def index
@@ -44,7 +49,8 @@ class BooksController < ApplicationController
   def update
   	  @book = Book.find(params[:id])
       @book.update(book_params)
-      redirect_to book_path(@book.id)
+      flash[:edit] = "編集しました。"
+      redirect_to books_path
   end
 
   def about
@@ -53,9 +59,14 @@ class BooksController < ApplicationController
 
   def destroy
   	  @book = Book.find(params[:id])
-      @book.destroy
-      redirect_to books_path
+      if @book.destroy
+      flash[:destroy] = "削除しました。"
+      redirect_to books_path, :flash => {:error => "errorが起きました"}
+      else
+      flash[:nodestroy] = "削除しませんでした"
+      redirect_to books_path, :flash => {:error => "errorが起きました"}
   end
+end
 
   		 private
 
