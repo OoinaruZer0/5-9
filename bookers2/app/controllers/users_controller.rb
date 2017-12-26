@@ -17,12 +17,23 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if @book.edit
+      flash[:edit] = "編集しました。"
+      redirect_to books_path, :flash => {:error => "errorが起きました"}
+  else
+  	flash[:noedit] = ""
+    redirect_to books_path, :flash => {:error => "errorが起きました"}
+end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
+    if@user.update(user_params)
     redirect_to user_path(@user.id)
+    else
+	flash[:notice] = "introductionは50文字以内でお願いします"
+    redirect_to edit_user_path, :flash => {:error => "errorが起きました"}
+    end
   end
 
 	private
