@@ -17,13 +17,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @book.edit
-      flash[:edit] = "編集しました。"
-      redirect_to books_path, :flash => {:error => "errorが起きました"}
-  else
-  	flash[:noedit] = ""
-    redirect_to books_path, :flash => {:error => "errorが起きました"}
-end
   end
 
   def update
